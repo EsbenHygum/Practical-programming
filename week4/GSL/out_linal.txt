@@ -1,0 +1,13 @@
+My vector solution:
+x0 = -1.1379
+x1 = -2.83303
+x2 = 0.851459
+
+Testing the obtained vector:
+y0 = 6.23
+y1 = 5.37
+y2 = 2.29
+The result should be:
+y0 = 6.23
+y1 = 5.37
+y2 = 2.29

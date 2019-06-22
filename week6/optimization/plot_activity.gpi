@@ -1,0 +1,10 @@
+set term svg
+set out 'plot_activity.svg'
+set terminal svg enhanced background rgb 'white'
+set grid
+set xlabel 'Time'
+set ylabel 'Activity'
+set key top right
+plot \
+	"<(sed -n '17, 117p' data_for_plot.txt)" using 1:2 lw 3 lc rgb 'red' with lines title 'Best fit' \
+	, "<(sed -n '3, 12p' data_for_plot.txt)" using 1:2:3 lc rgb 'blue' title "Data" with yerrorbars \

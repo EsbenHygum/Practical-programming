@@ -1,0 +1,12 @@
+Testing vector allocation:
+My chosen dimension is 5. The function allocates memory for a 5-dimensional vector. The function has passed.
+
+Testing nvector_set and nvector_get:
+My chosen value for the i'th index is 0.840188. The i'th value of my vector is 0.840188. The functions have passed.
+
+Testing nvector_dot_product:
+My result is 1.58082, while the function prints 1.58082. The function has passed.
+
+Testing nvector_free:
+The size of the vector before is 5, the size after freeing is 0. The function has passed.
+

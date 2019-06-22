@@ -1,0 +1,15 @@
+iter = 0 epsilon = -1.000 M(epsilon) = 1.103e+03
+iter = 1 epsilon = -0.859 M(epsilon) = 3.755e+02
+iter = 2 epsilon = -0.786 M(epsilon) = 1.987e+02
+iter = 3 epsilon = -0.705 M(epsilon) = 8.736e+01
+iter = 4 epsilon = -0.641 M(epsilon) = 4.010e+01
+iter = 5 epsilon = -0.586 M(epsilon) = 1.716e+01
+iter = 6 epsilon = -0.546 M(epsilon) = 6.842e+00
+iter = 7 epsilon = -0.519 M(epsilon) = 2.303e+00
+iter = 8 epsilon = -0.505 M(epsilon) = 5.525e-01
+iter = 9 epsilon = -0.501 M(epsilon) = 6.729e-02
+iter = 10 epsilon = -0.500 M(epsilon) = 2.406e-03
+iter = 11 epsilon = -0.500 M(epsilon) = 1.110e-05
+iter = 12 epsilon = -0.500 M(epsilon) = 1.844e-09
+iter = 13 epsilon = -0.500 M(epsilon) = -3.143e-14
+status = success

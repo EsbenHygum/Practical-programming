@@ -1,0 +1,9 @@
+set term svg
+set out 'plot.svg'
+set terminal svg enhanced background rgb 'white'
+set xlabel 'Data'
+set ylabel 'Function value'
+set key bottom right
+plot \
+	'io.out.txt' using 1:2 lc rgb 'red' with lines title 'Cosine function'\
+	, 'cmd.out.txt' using 1:2 lc rgb 'blue' with lines title 'Sine function'\

@@ -1,0 +1,8 @@
+set term svg
+set out 'plot_log.svg'
+set terminal svg enhanced background rgb 'white'
+set xlabel 'x'
+set ylabel 'y'
+set grid
+set key bottom right
+plot 'out_log.txt' using 1:2 with lines title 'Result'

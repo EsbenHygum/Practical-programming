@@ -1,0 +1,10 @@
+set term svg
+set out 'plot.svg'
+set terminal svg enhanced background rgb 'white'
+set xlabel 'r'
+set ylabel 'f(r)'
+set key top right
+plot \
+	'out_plot_dat.txt' using 1:2 lw 3 lc rgb 'green' with lines title 'My solution'\
+	, 'out_plot_dat.txt' using 1:3 lw 3 dt 2 lc rgb 'red' with lines title 'Exact solution'\
+

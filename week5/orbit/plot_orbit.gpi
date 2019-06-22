@@ -1,0 +1,14 @@
+set term svg
+set out 'plot_orbit.svg'
+set terminal svg enhanced background rgb 'white'
+set xlabel 'phi'
+set ylabel 'u'
+set grid
+set key bottom right
+plot \
+	'out_part_i.txt' using (1/$2)*sin($1):(1/$2)*cos($1) with lines title 'Part i' lc rgb 'red'\
+	, 'out_part_ii.txt' using (1/$2)*sin($1):(1/$2)*cos($1) with lines title 'Part ii' lc rgb 'black'\
+	, 'out_part_iii.txt' using (1/$2)*sin($1):(1/$2)*cos($1) with lines title 'Part iii' lc rgb 'blue'\
+
+
+

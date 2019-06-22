@@ -1,0 +1,2 @@
+Part 1:
+A numerical integration of the function yields the result =  -4.000000

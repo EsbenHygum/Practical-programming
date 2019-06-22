@@ -1,0 +1,18 @@
+Testing komplex_add:
+a= (1, 2i)
+b= (3, 4i)
+
+
+Testing the komplex add function:
+a+b should be equal to (4, 6i)
+a+b is actually equal to (4, 6i)
+
+
+Testing complex subtraction function:
+a-b should be equal to (-2, -2i)
+a-b is actually equal to (-2, -2i)
+
+
+Testing complex new and set functions:
+Our complex new function gives us (5, 3i)
+while our complex set function changes it to (2, 7i)

@@ -1,0 +1,55 @@
+---------- Part 1 ----------
+
+Part i
+
+My max while int = 2147483647
+My max for int = 2147483647
+My max do while int = 2147483647
+Max limit integer = 2147483647
+
+Part ii
+
+My min while int = -2147483648
+My min for int = -2147483648
+My min do while int = -2147483648
+Min limit integer = -2147483648
+
+Part iii
+
+w-float epsilon = 0.000000
+f-float epsilon = 0.000000
+dw-float epsilon = 0.000000
+
+w-double epsilon = 2.22045e-16
+f-double epsilon = 2.22045e-16
+dw-double epsilon = 2.22045e-16
+
+w-long double epsilon = 1.0842e-19
+f-long double epsilon = 1.0842e-19
+dw-long double epsilon = 1.0842e-19
+
+Value of float epsilon = 0.000000
+Value of double epsilon = 2.22045e-16
+Value of long double epsilon = 1.0842e-19
+
+--------Part 2--------
+
+Part i
+ Sum up float = 15.403683
+Sum down float = 18.807919
+
+Part ii
+The difference stems from the size of the first added value. When summing up (starting with 1.0 and adding smaller and smaller fractions) the size of the numbers will eventually be too small for the sum to change value. When summing down, we start with the lowest possible value and add larger and larger fractions. Hence, the added fractions will be large enough to make a difference at this precision.
+
+Part iii
+
+Part iv
+Sum up double = 20.9662
+Sum down double = 20.9662
+When using double the sums are equal. Here it does not matter whether we are summing up or down since the precision is double that of a float.
+
+---------- Part 3 ----------
+
+Since |7-10|<4, I obtain 1.
+Since |7-10|/(|7|+|10|)<10/2, I obtain 1.
+With a=7, b=10, tau=1, and epsilon=0 none of the criteria are met, and I thus obtain 0.

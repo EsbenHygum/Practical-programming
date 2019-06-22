@@ -1,0 +1,8 @@
+set term svg
+set out 'plot.svg'
+set terminal svg enhanced background rgb 'white'
+set xlabel 'Alpha'
+set ylabel 'Expectation value'
+set grid
+set key bottom right
+plot 'out_qm.txt' using 1:2 with lines title 'Result'

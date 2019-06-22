@@ -1,0 +1,13 @@
+set term pdf
+set out 'plot_err.pdf'
+set grid
+set title font ", 20"
+set title 'The error function'
+set xtics font ", 10"
+set xtics 3 2 1
+set ytics font ", 10"
+set ytics 1 0.5
+set xlabel 'x' font ", 15"
+set ylabel 'Error function' font ", 15"
+set key bottom right
+plot 'out_err.txt' using 1:2 lt 2 lw 3 lc rgb 'blue' with lines title 'Result'
