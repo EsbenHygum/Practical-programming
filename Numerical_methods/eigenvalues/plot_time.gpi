@@ -1,0 +1,20 @@
+set term svg
+set out 'plot_time.svg'
+set terminal svg enhanced background rgb 'white'
+
+f(x) = (x/a)**c + b
+g(x) = (x/d)**f + e
+a = 8; c = 3; b = 0.4
+d = 8; f = 3; e = 0.4
+fit f(x) "time_cyclic.txt" using 1:2 via a, c, b
+fit g(x) "time_ebye.txt" using 1:2 via d, f, e
+
+set xlabel "Dimension"
+set ylabel "Time [s]"
+set key top left
+plot \
+	"time_cyclic.txt" using 1:2 pt 7 lw 4 lc rgb "black" with points title "Cyclic",\
+	"time_ebye.txt" using 1:2 pt 7 lw 4 lc rgb "cyan" with points title "Eigen by eigen",\
+	f(x) with lines title sprintf("Cyclic: f(x)=(n/%.f)^{%.2f}+%.2f", a, c, b),\
+	g(x) with lines title sprintf("Eigen by eigen: g(x)=(n/%.f)^{%.2f}+%.2f", d, f, e)
+

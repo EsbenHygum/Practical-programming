@@ -1,0 +1,9 @@
+set term svg
+set out 'plot_ls.svg'
+set terminal svg enhanced background rgb 'white'
+set xlabel 'x'
+set ylabel 'y'
+set key bottom right
+plot\
+	'data.txt' using 1:2:3 with yerrorbars pt 7 title 'Data',\
+	'data_exp.txt' using 1:2 lt 2 lw 2 with lines title 'f(x)'
