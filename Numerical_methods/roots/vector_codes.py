@@ -50,11 +50,22 @@ class vector(object):
         vt.data[vt.start + vt.stride * i] = x
 
     def copy(vt):
-        v = vector(vt)
+        v = vector(vt.size)
         for ii in range(vt.size):
             v[ii] = vt[ii]
 
         return v
+
+    def dot_prod(vt, other):
+        dot_sum = 0
+        for ii in range(vt.size):
+            dot_sum += vt[ii]*other[ii]
+
+        return dot_sum
+
+    def norm(vt):
+        return math.sqrt(vector.dot_prod(vt, vt))
+
 
 def mt_vt_mult(A: matrix, b: vector):
 
