@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <pthread.h>
+#include <omp.h>
 #include <math.h>
 #include <time.h>
 
@@ -33,20 +33,28 @@ int main(int argc, char** argv){
 	int mid_sq = N/2;
 	struct pars data1, data2;
 
+	
+
 	data1.a = 0;
 	data1.b = mid_sq;
-	pthread_t thread;
-	pthread_create(&thread, NULL, pi, (void*)&data1);
-
 	data2.a = mid_sq;
 	data2.b = N;
-	pi((void*)&data2);
+	
 
-	pthread_join(thread, NULL);
+	#pragma omp parallel sections
+	{	
+		#pragma omp section
+		{
+			pi((void*)&data1);
+		}
+		#pragma omp section
+		{
+			pi((void*)&data2);
+		}
+	}
 
 	double pi = 4.0 * (data1.res + data2.res)/N;
-
-	printf("%d %g\n", N, pi);
+	printf("Pi = %g\n", pi);
 
 return 0;
 }

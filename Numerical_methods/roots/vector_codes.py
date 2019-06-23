@@ -49,7 +49,12 @@ class vector(object):
     def __setitem__(vt, i, x):
         vt.data[vt.start + vt.stride * i] = x
 
+    def copy(vt):
+        v = vector(vt)
+        for ii in range(vt.size):
+            v[ii] = vt[ii]
 
+        return v
 
 def mt_vt_mult(A: matrix, b: vector):
 
