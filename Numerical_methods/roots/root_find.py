@@ -6,7 +6,6 @@ from qr_decomp import *
 def rf_analytic(f, x0: vector, jacobian, eps: float, iteration = 0):
     x = vector.copy(x0)
     minus_f_x = vector(x.size)
-
     f_x = f(x)
 
     while vector.norm(f_x) > eps:

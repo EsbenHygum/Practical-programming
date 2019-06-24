@@ -1,6 +1,4 @@
-#from __future__ import print_function
 import sys
-#import string
 from matrix_codes import *
 import numpy as np
 from eigen import *
@@ -22,11 +20,20 @@ for ii in range(0, n):
          A[jj, ii] = const
 
 
-
+A1 = mt_copy(A)
 print("Printing original matrix, A:")
-matrix.printing(A)
+matrix.printing(A1)
 
-D, V = eigen_by_eigen(A, n, 1e-6)
+D, V = eigen_by_eigen(A1, n, 1e-6, high_to_low = False) 
 
+print("Printing matrix with eigenvalues, D, low to high:")
 matrix.printing(D)
+print("Printing matrix with eigenvectors, V, corresponding to low to high:")
 matrix.printing(V)
+
+D1, V1 = eigen_by_eigen(A, n, 1e-6, high_to_low = True)
+
+print("Printing matrix with eigenvalues, D, high to low:")
+matrix.printing(D1)
+print("Printing matrix with eigenvectors, V, corresponding to high to low:")
+matrix.printing(V1)

@@ -1,6 +1,6 @@
 from matrix_codes import *
 from math import *
-
+from qr_decomp import *
 
 def jacobi_cycle(A: matrix, prec: float):
     assert(A.size1 == A.size2)
@@ -40,7 +40,8 @@ def jacobi_cycle(A: matrix, prec: float):
 
 
 
-def eigen_by_eigen(A: matrix, num: int, prec: float, high_to_low = False): 
+def eigen_by_eigen(A: matrix, num: int, prec: float):
+    
 
     V = matrix(A.size1, A.size2)
     for ii in range(V.size1):
@@ -53,29 +54,59 @@ def eigen_by_eigen(A: matrix, num: int, prec: float, high_to_low = False):
     for pp in range(num-1):
         while max(abs(A[pp, j]) for j in range(pp+1, A.size1)) > prec:
             for qq in range(pp + 1, A.size1):
-                if high_to_low == False:
-                    phi = 0.5*np.arctan2(2.0*A[pp, qq], A[qq, qq]-A[pp, pp])
-                elif high_to_low == True: 
-                    phi = 0.5*(pi+np.arctan2(2.0*A[pp, qq], A[qq, qq]-A[pp, pp]))
+                
+                phi = 0.5*np.arctan2(2.0*A[pp, qq], A[qq, qq]-A[pp, pp])
+                
                 c = cos(phi)
                 s = sin(phi)
-                Ap[pp, pp] = c*c*A[pp,pp] - 2*s*c*A[pp, qq] + s*s*A[qq, qq]
-                Ap[qq, qq] = s*s*A[pp,pp] + 2*s*c*A[pp,qq] + c*c*A[qq, qq]
-                Ap[pp, qq] = s*c*(A[pp, pp] - A[qq, qq]) + (c*c - s*s)*A[pp, qq]
+
+                Ap[pp, pp] = c**2*A[pp,pp] - 2*s*c*A[pp, qq] + s**2*A[qq, qq]
+                Ap[pp, qq] = s*c*(A[pp, pp] - A[qq, qq]) + (c**2 - s**2)*A[pp, qq]
+                Ap[pp, qq] = s*c*(A[pp, pp] - A[qq, qq]) + (c**2 - s**2)*A[pp, qq]
                 Ap[qq, pp] = Ap[pp, qq]
+
                 for ii in range(A.size1):
                     if (ii != pp and ii != qq):
                         Ap[pp, ii] = c*A[pp, ii] - s*A[qq, ii]
                         Ap[ii, pp] = Ap[pp, ii]
                         Ap[qq, ii] = s*A[pp, ii] + c*A[qq, ii]
                         Ap[ii, qq] = Ap[qq, ii]
-                    
+                           
                     Vp[ii, pp] = c*V[ii, pp] - s*V[ii, qq]
                     Vp[ii, qq] = s*V[ii, pp] + c*V[ii, qq]
-                
+
+
                 A = mt_copy(Ap)
                 V = mt_copy(Vp)
+
 
     return A, V
 
 
+
+def gen_eigen(A: matrix, N: matrix):
+
+    D, V = jacobi_cycle(N, 1e-4)
+    sqrt_D = matrix(D.size1, D.size2)
+
+    for ii in range(D.size1):
+        sqrt_D[ii, ii] = sqrt(D[ii, ii])
+
+    VtAV = matrix_mult(trans(V), matrix_mult(A, V))
+    inv_sq_D = qr_gs_inverse(sqrt_D)
+
+    B = matrix_mult(inv_sq_D, matrix_mult(VtAV, inv_sq_D))
+    D_B, y_matrix = jacobi_cycle(B, 1e-6)
+    
+    y = vector(y_matrix.size1)
+    xes = []
+    lamb = []
+    for ii in range(y_matrix.size1):
+        for jj in range(y_matrix.size1):
+            y[jj] = y_matrix[jj,ii]
+        
+        lamb.append(D_B[ii, ii])
+        x_ii = qr_gs_solve(matrix_mult(sqrt_D, trans(V)), y)
+        xes.append(x_ii)
+
+    return xes, lamb
