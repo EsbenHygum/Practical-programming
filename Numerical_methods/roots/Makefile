@@ -1,6 +1,6 @@
 out.txt: main.py
-	python3 $<
+	python3 $< > $@
 
 
 clean:
-	$(RM) -r __pycache__
+	$(RM) -r __pycache__ *.txt
