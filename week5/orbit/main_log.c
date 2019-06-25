@@ -19,14 +19,14 @@ int main(){
 	sys.params = NULL;
 
 	gsl_odeiv2_driver *driver;
-	double hstart = 0.1, abs = 1e-5, eps = 1e-5;
+	double hstart = 0.01, abs = 1e-6, eps = 1e-6;
 	driver = gsl_odeiv2_driver_alloc_y_new(&sys, gsl_odeiv2_step_rk8pd, hstart, abs, eps);
 	
 	double x0 = 0;
 	double y0 = 0.5;
 	double y[1] = { y0 };
 	
-	for(double x = 0; x < 3; x += 0.1){
+	for(double x = 0; x <= 3; x += 0.01){
 
 		gsl_odeiv2_driver_apply (driver, &x0, x, y);
 		printf("%g %g\n", x, y[0]);
