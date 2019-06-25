@@ -1,0 +1,7 @@
+set term svg
+set out 'plot_orbit.svg'
+set terminal svg enhanced background rgb 'white'
+set grid 
+
+plot\
+	"orbit.dat" using (1/$2)*sin($1):(1/$2)*cos($1) lt 2 lw 3 lc rgb 'black' with lines notitle

@@ -1,0 +1,6 @@
+set term svg
+set out "plot_log.svg"
+set terminal svg enhanced background rgb 'white'
+set grid
+
+plot "log_func.dat" using 1:2 lt 2 lw 3 lc rgb "black" with lines notitle
