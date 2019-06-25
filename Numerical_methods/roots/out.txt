@@ -5,7 +5,7 @@ Scipy.optimize.root yields a minimum at [9.10614674e+00 1.09815933e-05] with 47 
 The starting point was chosen as [2.00;1.00]
 
 Testing solutions to Rosenbrock's valley function:
-The analytic function yields a minimum at [1.00;1.00] with 1168 steps
+The analytic function yields a minimum at [1.00;1.00] with 759 steps
 The numeric function yields a minimum at [1.00;1.00] with 1345 steps
 Scipy.optimize.root yields a minimum at [1. 1.] with 377 steps
 The starting point was chosen as [2.00;1.00]

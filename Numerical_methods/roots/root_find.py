@@ -3,7 +3,7 @@ from vector_codes import *
 from matrix_codes import *
 from qr_decomp import *
 
-def rf_analytic(f, x0: vector, jacobian, eps: float, iteration = 0):
+def rf_analytic(f, x0: vector, jacobian, eps: float):
     x = vector.copy(x0)
     minus_f_x = vector(x.size)
     f_x = f(x)
@@ -18,7 +18,6 @@ def rf_analytic(f, x0: vector, jacobian, eps: float, iteration = 0):
         while True:
             
             lamb /= 2
-            iteration += 1
             for jj in range(x.size):
                 x[jj] = x[jj] + lamb*delta_x[jj]
 
@@ -27,11 +26,11 @@ def rf_analytic(f, x0: vector, jacobian, eps: float, iteration = 0):
             if vector.norm(f_x2) < (1-lamb/2)*vector.norm(f_x) or lamb < 0.02: break
         f_x = f_x2
 
-    return x, iteration
+    return x
 
 
 
-def rf_numeric(f, x0: vector, eps: float, dx: float, iteration = 0):
+def rf_numeric(f, x0: vector, eps: float, dx: float):
     
     x = vector.copy(x0)
     df = vector(x.size)
@@ -59,7 +58,6 @@ def rf_numeric(f, x0: vector, eps: float, dx: float, iteration = 0):
         while True:
             
             lamb /= 2
-            iteration += 1
             for jj in range(x.size):
                 x[jj] = x[jj] + lamb*delta_x[jj]
             
@@ -69,6 +67,6 @@ def rf_numeric(f, x0: vector, eps: float, dx: float, iteration = 0):
         if vector.norm(delta_x) < dx: break
         
 
-    return x, iteration
+    return x
 
 

@@ -1,4 +1,4 @@
-out.txt: main.py
+out.txt: main.py root_find.py
 	python3 $< > $@
 
 
