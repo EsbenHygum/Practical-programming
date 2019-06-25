@@ -1,0 +1,16 @@
+Testing minimization methods on Rosenbrock's function:
+Using Newton's method yields a minimum at [1.00;1.00] with 210 steps
+Using the quasi Newton analytical method yields a minimum at [1.00;1.00] with 21782 steps
+The analytic root-finding function yields a minimum at [1.00;1.00] with 759 steps
+The initial guess was [2.00;1.00]
+
+
+Testing minimization methods on Himmelblau's function:
+Using Newton's method yields a minimum at [3.00;2.00] with 81 steps
+Using the quasi Newton analytical method yields a minimum at [3.00;2.00] with 152 steps
+The analytic root-finding function yields a minimum at [3.00;2.00] with 23 steps
+The initial guess was [2.00;1.00]
+
+
+Fitting problem:
+The obtained parameters are: A = 3.561, T = 3.214, B = 1.222

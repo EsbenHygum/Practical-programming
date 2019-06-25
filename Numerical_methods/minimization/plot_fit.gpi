@@ -1,0 +1,9 @@
+set term svg
+set out 'plot_fit.svg'
+set terminal svg enhanced background rgb 'white'
+set xlabel 't'
+set ylabel 'y'
+
+plot \
+	"fitting_params.dat" using 1:2 lt 2 lw 3 lc rgb 'blue' with lines title "Fit",\
+	"data.dat" using 1:2:3 with yerrorbars pt 7 lc rgb 'black' title 'Data'
