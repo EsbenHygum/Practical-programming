@@ -1,0 +1,65 @@
+Integrate sqrt(x): 
+Result should be 2/3
+Result is 0.6666666796852266 
+Calls: 276
+
+Integrate sqrt(x) using Clenshaw-Curtis: 
+Result should be 2/3
+Result is 0.6666668380254832 
+Calls: 436
+
+Integrate sqrt(x) using SciPy: 
+Result should be 2/3
+Result is 0.6666666666666669 
+Calls: 231
+
+
+
+Integrate 1/sqrt(x): 
+Result should be 2
+Result is 1.9999999989491561 
+Calls: 123900
+
+Integrate 1/sqrt(x) using Clenshaw-Curtis: 
+Result should be 2
+Result is 1.99999999993764 
+Calls: 352
+
+Integrate 1/sqrt(x) using SciPy: 
+Result should be 2
+Result is 1.9999999999999984 
+Calls: 231
+
+
+
+Integrate ln(x)/sqrt(x): 
+Result should be -4
+Result is -3.999998348990209 
+Calls: 29972
+
+Integrate ln(x)/sqrt(x): 
+Result should be -4
+Result is -3.9999981333960255 
+Calls: 272
+
+Integrate ln(x)/sqrt(x) using SciPy: 
+Result should be -4
+Result is -4.000000000000085 
+Calls: 315
+
+
+
+Integrate 4*sqrt(1-(1-x)^2): 
+Result should be pi
+Result is 3.1415926576917723 
+Calls: 560
+
+Integrate 4*sqrt(1-(1-x)^2) using Clenshaw-Curtis: 
+Result should be pi
+Result is 3.141592653555239 
+Calls: 856
+
+Integrate 4*sqrt(1-(1-x)^2) using SciPy: 
+Result should be pi
+Result is 3.1415926535897922 
+Calls: 231
