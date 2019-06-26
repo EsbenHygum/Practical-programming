@@ -38,52 +38,6 @@ def jacobi_cycle(A: matrix, prec: float):
     
     return A, V
 
-
-
-def eigen_by_eigen(A: matrix, num: int, prec: float):
-    
-
-    V = matrix(A.size1, A.size2)
-    for ii in range(V.size1):
-        V[ii, ii] = 1
-    
-    Ap = mt_copy(A)
-    Vp = mt_copy(V)
-    
-
-    for pp in range(num-1):
-        while max(abs(A[pp, j]) for j in range(pp+1, A.size1)) > prec:
-            for qq in range(pp + 1, A.size1):
-                
-                phi = 0.5*np.arctan2(2.0*A[pp, qq], A[qq, qq]-A[pp, pp])
-                
-                c = cos(phi)
-                s = sin(phi)
-
-                Ap[pp, pp] = c**2*A[pp,pp] - 2*s*c*A[pp, qq] + s**2*A[qq, qq]
-                Ap[pp, qq] = s*c*(A[pp, pp] - A[qq, qq]) + (c**2 - s**2)*A[pp, qq]
-                Ap[pp, qq] = s*c*(A[pp, pp] - A[qq, qq]) + (c**2 - s**2)*A[pp, qq]
-                Ap[qq, pp] = Ap[pp, qq]
-
-                for ii in range(A.size1):
-                    if (ii != pp and ii != qq):
-                        Ap[pp, ii] = c*A[pp, ii] - s*A[qq, ii]
-                        Ap[ii, pp] = Ap[pp, ii]
-                        Ap[qq, ii] = s*A[pp, ii] + c*A[qq, ii]
-                        Ap[ii, qq] = Ap[qq, ii]
-                           
-                    Vp[ii, pp] = c*V[ii, pp] - s*V[ii, qq]
-                    Vp[ii, qq] = s*V[ii, pp] + c*V[ii, qq]
-
-
-                A = mt_copy(Ap)
-                V = mt_copy(Vp)
-
-
-    return A, V
-
-
-
 def gen_eigen(A: matrix, N: matrix):
 
     D, V = jacobi_cycle(N, 1e-4)

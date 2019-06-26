@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{xfrac}
+\usepackage{url}
+\usepackage[
+backend=biber,
+style=numeric,
+sorting=ynt
+]{biblatex}
+\bibliography{bibl}
+\addbibresource{url.bib}
+
+\title{Solving the generalized eigenvalue problem}
+\author{Julie Thiim Gadeberg}
+\date{June 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+The aim of this report is to describe a created algorithm that can solve a generalized eigenvalue problem. The report gives a short introduction to the theory behind the problem provided by~\cite{jacobi} and~\cite{linalg}. This is done in section~\ref{sec:theory}. In section~\ref{sec:algorithm} the created algorithm is explained, and the reader is provided with a resulting example in section~\ref{sec:results}.
+
+
+\section{The generalized eigenvalue problem}\label{sec:theory}
+
+The generalized eigenvalue equation is defined as:
+\begin{equation}
+    Ax = \lambda N x,
+    \label{eq:gen}
+\end{equation}
+where $A$ is a real symmetric matrix, and N is a real symmetric positive-definite matrix. The problem can represented as an ordinary eigenvalue problem:
+\begin{equation}
+    By = \lambda y,
+    \label{eq:ordinary}
+\end{equation}
+by using a eigenvalue decomposition on the matrix N. The chosen eigenvalue decomposition is the Jacobi diagonalization with cyclic sweeps, in which the off-diagonal elements of the matrix are zeroed, row after row, by each Jacobi rotation. The eigenvectors of the matrix can be calculated by $V = \mathbf{I}J_1J_2...$ with $J_n$ being the successive Jacobi matrices. The remaining result is a diagonalized eigenvalue matrix $D$, and a matrix of eigenvectors, $V$. It is then possible to rewrite $N$ as:
+\begin{equation}
+    N = VDV^T.
+    \label{eq:n}
+\end{equation}
+Utilizing $VV^T =\mathbf{I}$ we can rewrite equation~\ref{eq:gen} as equation~\ref{eq:ordinary} by inserting the newly found expression~\ref{eq:n}:
+\begin{align}
+    &V^TAx = \lambda VDV^T x,\\
+    &\sqrt{D}\sqrt{D^{-1}}V^TA VV^Tx = \lambda \sqrt{D}\sqrt{D}x,\\
+    &\sqrt{D^{-1}}V^TAVV^T\sqrt{D^{-1}}x = \lambda \sqrt{D}x,\\\label{eq:B}
+    &By = \lambda y,
+\end{align}
+with $B = \sqrt{D^{-1}}V^TAV\sqrt{D^{-1}}$ while the eigenvector $y = \sqrt{D}V^Tx$. From there, the Jacobi diagonalization with cyclic sweeps is performed again, this time over the matrix $B$, yielding its eigenvalues and eigenvectors. Solving the linear equation:
+\begin{equation}
+    y = \sqrt{D}V^T x,
+\end{equation}
+we thus obtain the original eigenvectors for the generalized system.
+
+\section{The algorithm}\label{sec:algorithm}
+The overall master algorithm is based on several small subroutines created throughout the course. In the following subsections, these small subroutines will be explained thoroughly. In the last subsection the structure of the master algorithm is described. 
+
+\subsection*{Jacobi diagonalization}
+The first useful routine is the Jacobi eigenvalue decomposition routine with cyclic sweeps. The arguments of the algorithm is a real symmetric matrix $A$, and a precision that is used as a convergence criterion.
+
+The algorithm firstly sets up the Jacobi matrix, $J$, and the matrix of eigenvectors as two separate identity matrices. Once this is done, the decomposition can start. The convergence criterion is chosen as max $|A_{ij}| < \epsilon$, with $\epsilon$ being the aforementioned precision argument. A double nested for-loop is inserted inside the while-statement that is \texttt{True} until the convergence criterion is met. This ranges firstly over the number of rows ($p$) subtracted by $1$, and then the columns ($q$) with numbers larger than the row number. While the rest of the matrix $J$ is kept as before, the diagonal elements $J_{pp}$ and $J_{qq}$ are replaced by $\cos(\phi)$, and the off-diagonal elements $J_{pq}$ and $J_{qp}$ are replaced by $\sin(\phi)$ and $-\sin(\phi)$ respectively. $\phi$ is given by:
+\begin{equation*}
+    \phi = 0.5\arctan\bigg(\frac{2*A_{pq}}{A_{qq}-A_{pp}}\bigg).
+\end{equation*}
+
+The algorithm proceeds by calculating $A \rightarrow A' = J^TAJ$ while setting $V \rightarrow V'= VJ$. The Jacobi matrix is then reset as the identity matrix, and the loop continues. When the convergence criterion is met, the algorithm returns $A'$ which is the diagonal eigenvalue matrix, as well as $V$ being the matrix with eigenvectors as columns.
+
+\subsection*{QR-decomposition}
+The master algorithm indirectly utilizes a subroutine in order to solve linear equations and calculate inverse matrices. The subroutine implements a QR-decomposition by modified in-place Gram-schmidt orthogonalization, and takes a real matrix $A$, as argument. The decomposition factorizes $A$ such that $A = QR$ with $Q$ being an orthogonal matrix, and $R$ being an upper right triangular matrix.
+
+The first part of the algorithm allocates memory for the matrices $Q$ and $R$, and copies the matrix $A$. Then two parallel for-loops are created inside an outer for-loop ranging over the number of columns. The diagonal elements of $R$ are the length of the separate column vectors in the copied matrix $A'$. This length is used in order to calculate the elements of $Q$ where $Q_{pq} = \sfrac{A'_{pq}}{R_{qq}}$ which is the aim of the first parallel nested for-loop. The second parallel for-loop is doubly nested and calculates the remaining upper right triangular elements of $R$ by $R_{pq} = \mathbf{q}_{i}^T\mathbf{a}_{q}$. Every time a new element of $R$ is found, the matrix $A$ is updated, so $ A_{pq} = A_{pq} - Q_{pi}R_{iq}$ with $i$ being the column number from the outer for-loop.
+
+The algorithm returns the factorized matrix $A$ as $Q$ and $R$.
+
+\subsection*{Solving the linear equation}
+
+In order to solve the linear equation $y = \sqrt{D}V^Tx$, QR-decomposition subroutine is used. This algorithm takes a matrix $A$ and vector $b$ as arguments. 
+
+We use the $QR$-decomposition routine to firstly factorize the matrix $A$ into $Q$ and $R$ in order to transform the system -- moving from the original to an upper triangular system $Rx = Q^Tb$. The system can be solved by using back-substitution given as:
+\begin{equation}
+    y_i = \frac{1}{R_{ii}} \bigg((Q^Tb)_i - \sum_{k = i+1}^n U_{ik}x_k\bigg), i = n, n-1,...,1. 
+    \label{eq:back}
+\end{equation}
+The first $x_n = \frac{b_n}{U_{nn}}$. Each element calculated by use of equation~\ref{eq:back} is stored in the vector $x$, which is then returned by the algorithm.
+
+\subsection*{Calculating inverse matrices}
+
+In order to calculate the inverse of a given matrix $A$, we only need to utilize the linear equation solver subroutine, as it is the system $AA^{-1}=I$ that needs to be solved. Space is allocated for the inverse matrix $A^{-1}$, and the identity matrix $I$ is defined. For every column in $I$ the subroutine is used to solve the equation $Ae_i = a_i$ with $a_i$ being the $i$'th column of the inverse matrix. The columns are then combined to the single inverse matrix that is returned by this algorithm.
+
+\subsection*{The master algorithm}
+
+The master algorithm solves a generalized eigenvalue equation~\ref{eq:gen}. Two real symmetric matrices $A$ and $N$, with $N$ also being positive definite, are used as arguments.
+
+We firstly calculate the eigenvalue and -vector matrices $D$ and $V$ for the matrix $N$, and take the square root of the elements in $D$. By using the inverse subroutine it is possible to finally calculate the matrix $B$ as described in equation~\ref{eq:B}. Once more the Jacobi eigenvalue decomposition subroutine is used to find the eigenvalues and eigenvectors for $B$. 
+
+As the problem is transformed into an ordinary eigenvalue problem, each eigenvector -- $y_i$ -- of $B$ can be used to restore the original eigenvectors $x$. This only requires solving the linear equation $y_i = \sqrt{D}V^Tx$. The original eigenvectors $x$ and eigenvalues stored in $D$ are then returned by the algortihm, and the generalized eigenvalue equation has been solved.
+
+\section{Results}\label{sec:results}
+
+The master algorithm is tested on two randomly generated real symmetric matrices $A$ and $N$, where $N$ is also positive-definite. The latter is ensured by generating a random real symmetric matrix $M$ and multiplying it by its transpose - giving $N  = M^TM$. In this report we look at the generalized eigenvalue problem:
+\begin{equation}
+    \begin{bmatrix}
+    0.242 &0.683 &0.997\\
+    0.683 &0.026 &0.272\\
+    0.997 &0.272 &0.249
+    \end{bmatrix} x = \lambda 
+    \begin{bmatrix}
+    1.485 &0.266 &0.794\\
+    0.266 &1.545 &0.748\\
+    0.794 &0.748 &1.586
+    \end{bmatrix} x.
+\end{equation}
+The master algorithm returns the eigenvalues and corresponding eigenvectors for the generalized eigenvalue equation one set at a time. The result is:
+\begin{equation}
+    \mathbf{x} = \begin{bmatrix}
+    0.835 &-0.063 &0.476\\
+    0.038 &0.890 &0.229\\
+    -0.831 &-0.544 &0.325
+    \end{bmatrix}, \boldsymbol{\lambda} = \begin{bmatrix}
+    -1.017 &0 &0\\
+    0 &-0.176 &0\\
+    0 &0 &0.580 
+    \end{bmatrix},
+\end{equation}
+with $\mathbf{x}$ being a matrix with an eigenvector in each column, and $\boldsymbol{\lambda}$ being a diagonal eigenvalue matrix. It is possible to test the result by inserting one of the eigenvectors and its corresponding eigenvalue into the original equation~\ref{eq:gen} yielding:
+\begin{align*}
+    \begin{bmatrix}
+    0.242 &0.683 &0.997\\
+    0.683 &0.026 &0.272\\
+    0.997 &0.272 &0.249
+    \end{bmatrix} \begin{bmatrix}
+    0.835\\
+    0.266\\
+    0.794
+    \end{bmatrix} &= -1.02 \begin{bmatrix}
+    1.485 &0.266 &0.794\\
+    0.266 &1.545 &0.748\\
+    0.794 &0.748 &1.586
+    \end{bmatrix} \begin{bmatrix}
+    0.835\\
+    0.266\\
+    0.794
+    \end{bmatrix}
+    \\[2.5mm]
+    \begin{bmatrix}
+    -0.600\\
+    0.346\\
+    0.636
+    \end{bmatrix} &= \begin{bmatrix}
+    -0.600\\
+    0.346\\
+    -0.636
+    \end{bmatrix}.
+\end{align*}
+In general, all of the sets are checked in order to make sure that the master algorithm works as intended, but only an example is given here. This shows that the algorithm works as intended, and the generalized eigenvalue problem has been solved.
+
+\newpage
+\printbibliography
+
+\end{document}

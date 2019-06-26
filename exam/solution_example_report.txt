@@ -1,0 +1,72 @@
+Printing matrix A
+0.242	0.683	0.997	
+0.683	0.026	0.272	
+0.997	0.272	0.249	
+
+
+
+Printing matrix N
+1.485	0.266	0.794	
+0.266	1.545	0.748	
+0.794	0.748	1.586	
+
+
+
+Printing eigenvector and eigenvalue 1
+0.835
+0.038
+-0.831
+
+-1.0171720797569213
+
+Testing Ax = lambda*Nx for eigenvector and eigenvalue 1
+Ax:
+-0.600
+0.346
+0.636
+
+lambda*Nx:
+-0.600
+0.346
+0.636
+
+
+
+Printing eigenvector and eigenvalue 2
+-0.063
+0.890
+-0.544
+
+-0.1759850553014648
+
+Testing Ax = lambda*Nx for eigenvector and eigenvalue 2
+Ax:
+0.051
+-0.168
+0.043
+
+lambda*Nx:
+0.051
+-0.168
+0.043
+
+
+
+Printing eigenvector and eigenvalue 3
+0.476
+0.229
+0.325
+
+0.5801214007022336
+
+Testing Ax = lambda*Nx for eigenvector and eigenvalue 3
+Ax:
+0.595
+0.420
+0.618
+
+lambda*Nx:
+0.595
+0.420
+0.618
+

@@ -22,7 +22,7 @@ for ii in range(0, n):
 NtN = matrix_mult(trans(N), N)
 
 for ii in range(NtN.size1):
-    N[ii,ii] = NtN[ii,ii] + 0*1 #Make N real positive definite
+    N[ii,ii] = NtN[ii,ii] #Make N real positive definite
 
 print("Printing matrix A")
 matrix.printing(A)

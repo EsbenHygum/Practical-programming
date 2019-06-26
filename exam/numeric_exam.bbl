@@ -1,0 +1,67 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.9 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{jacobi}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=1b9877a07899d53377cd086a4c713ee6}{%
+           family={{Fedorov}},
+           familyi={F\bibinitperiod},
+           given={D.\bibnamedelimi V.},
+           giveni={D\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+      }
+      \strng{namehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{fullhash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{bibnamehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{authorbibnamehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{authornamehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{authorfullhash}{1b9877a07899d53377cd086a4c713ee6}
+      \field{sortinit}{9}
+      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{62.107.14.89/~fedorov/prog/numeric/book/eigen.pdf}}
+      \field{title}{Eigenvalues and eigenvectors}
+    \endentry
+    \entry{linalg}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=1b9877a07899d53377cd086a4c713ee6}{%
+           family={{Fedorov}},
+           familyi={F\bibinitperiod},
+           given={D.\bibnamedelimi V.},
+           giveni={D\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+      }
+      \strng{namehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{fullhash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{bibnamehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{authorbibnamehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{authornamehash}{1b9877a07899d53377cd086a4c713ee6}
+      \strng{authorfullhash}{1b9877a07899d53377cd086a4c713ee6}
+      \field{sortinit}{9}
+      \field{sortinithash}{1dd72ab054147731c9d824b49aba0534}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{http://62.107.14.89/~fedorov/prog/numeric/book/lineq.pdf}}
+      \field{title}{Systems of linear equations}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

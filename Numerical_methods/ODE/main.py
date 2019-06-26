@@ -25,7 +25,7 @@ y0 = 1
 y1 = -0.5
 t = np.array([a])
 y = np.array([y0, y1])
-h = 0.01
+h = 0.1
 
 y_res, points = driver(orbit, rk34, t, b, h, y, 1e-6, 1e-6)
 

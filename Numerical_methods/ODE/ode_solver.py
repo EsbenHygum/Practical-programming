@@ -19,7 +19,6 @@ def rk34(t: float, yt, h: float, f):
 def driver(f, stepper, t, b: float, h: float, y, acc: float, eps: float):
 
     a = t[-1]
-    counts = 0
     t0 = t[-1]
     ts = []
     ys = []
@@ -27,7 +26,6 @@ def driver(f, stepper, t, b: float, h: float, y, acc: float, eps: float):
 
     while b - t0 > eps:
         
-        #if counts > 10000: return print("Error: Number of counts exceeds limit")
         if t0 >= b: break
         if t0+h > b: 
             h = b-t0
@@ -36,7 +34,6 @@ def driver(f, stepper, t, b: float, h: float, y, acc: float, eps: float):
         tol = (acc + np.linalg.norm(y)*eps)*sqrt(h/(b-a))
 
         if err < tol:
-            counts += 1
             t0 = t0 + h
             y = yt
             ts.append(t0)
@@ -48,6 +45,5 @@ def driver(f, stepper, t, b: float, h: float, y, acc: float, eps: float):
 
         else: 
             h *= ((tol/err)**0.25)*0.95
-
 
     return y, np.array([ts, ys, errs])
