@@ -11,6 +11,9 @@ if len(sys.argv)>1 :
 else:
     n = 4
 
+
+print("Testing cyclic eigenvalue decomposition")
+
 A = matrix(n, n)
 
 

@@ -3,6 +3,8 @@ from matrix_codes import *
 import numpy as np
 from eigen import *
 
+print("\nTesting eigenvalue by eigenvalue decomposition")
+
 if len(sys.argv)>1 : 
     n = int(sys.argv[1])
 
@@ -30,6 +32,8 @@ print("Printing matrix with eigenvalues, D, low to high:")
 matrix.printing(D)
 print("Printing matrix with eigenvectors, V, corresponding to low to high:")
 matrix.printing(V)
+
+print('\nTesting decomposition from high to low eigenvalue')
 
 D1, V1 = eigen_by_eigen(A, n, 1e-6, high_to_low = True)
 
