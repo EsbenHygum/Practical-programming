@@ -5,8 +5,8 @@ set terminal svg enhanced background rgb 'white'
 set log x
 set log y
 set xlabel "Number of darts"
-set ylabel "Pi"
+set ylabel "abs(MC_Pi - Pi)"
 
 plot\
-	"out_pi.txt" using 1:(abs($2-pi)) lt 2 lc rgb 'black' with points title 'Stuff'
+	"out_pi.txt" using 1:(abs($2-pi)) lt 2 lc rgb 'black' with points title 'Result'
 
