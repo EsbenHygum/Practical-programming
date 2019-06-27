@@ -1,0 +1,13 @@
+set term svg
+set out 'plot_a.svg'
+set terminal svg enhanced background rgb 'white'
+
+set title "ANN interpolation of Gaussian function"
+set xlabel 'x'
+set ylabel 'f(x)'
+
+plot \
+	'out_a.dat' using 1:3 lw 4 lc rgb 'blue' with lines title 'Expected'\
+	, 'out_a.dat' using 1:2 lw 4 dt 2 lc rgb 'green' with lines title "From ANN"\
+
+ 
