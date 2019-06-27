@@ -1,0 +1,18 @@
+Rectangular prism with variable density: 
+Result should be 180
+Result is 179.64372852144496 p/m 1.9112176127780731
+
+
+Volume of sphere with radius = 1:
+Result should be 4/3 pi (approximately 4.19)
+Result is 4.194380095825225 p/m 0.03757914046675239
+
+
+Result of difficult integral: 
+Result should be approximately 1.39
+Result is 1.37310444125799 p/m 0.020464106687463516
+
+
+Testing convergence on error of sphere:
+See plot
+The expected result has been multiplied by a factor of 5
